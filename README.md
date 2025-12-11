@@ -2,6 +2,9 @@
 
 A self-contained image generation task queue demonstrating enterprise backend patterns: **async task processing**, **exponential backoff retries**, **real-time updates via SSE**, and **graceful error handling**.
 
+### **[Click here to see live online.](https://task-queue-visualizer.onrender.com/)**
+> **Note**: This demo is hosted on Render's free tier. The first request may take 30-90 seconds as the service spins up, cold starting from idle.
+
 **100% FREE - No API key needed!** Uses [Pollinations.ai](https://pollinations.ai) for image generation.
 
 ## What This Teaches
