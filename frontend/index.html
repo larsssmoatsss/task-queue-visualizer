@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Queue - Image Generation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>IMAGE GENERATION QUEUE</h1>
+      <p class="subtitle">Async Task Processing with Retry Logic</p>
+    </header>
+
+    <!-- Connection Status -->
+    <div id="connection-status" class="connection-status disconnected">
+      <span class="status-dot"></span>
+      <span class="status-text">Connecting...</span>
+    </div>
+
+    <!-- Submit Form -->
+    <section class="submit-section">
+      <h2>Submit a Task</h2>
+      <form id="submit-form" class="submit-form">
+        <input 
+          type="text" 
+          id="prompt-input" 
+          placeholder="Describe an image to generate..."
+          maxlength="1000"
+          autocomplete="off"
+        >
+        <button type="submit" id="submit-btn">Generate</button>
+      </form>
+      <div id="form-error" class="form-error"></div>
+    </section>
+
+    <!-- Queue Stats -->
+    <section class="stats-section">
+      <h2>Queue Status</h2>
+      <div class="stats-grid">
+        <div class="stat-card pending">
+          <span class="stat-value" id="stat-pending">0</span>
+          <span class="stat-label">Pending</span>
+        </div>
+        <div class="stat-card processing">
+          <span class="stat-value" id="stat-processing">0</span>
+          <span class="stat-label">Processing</span>
+        </div>
+        <div class="stat-card retrying">
+          <span class="stat-value" id="stat-retrying">0</span>
+          <span class="stat-label">Retrying</span>
+        </div>
+        <div class="stat-card completed">
+          <span class="stat-value" id="stat-completed">0</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="stat-card failed">
+          <span class="stat-value" id="stat-failed">0</span>
+          <span class="stat-label">Failed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task Queue -->
+    <section class="queue-section">
+      <h2>Tasks</h2>
+      <div id="task-list" class="task-list">
+        <div class="empty-state">
+          <p>No tasks yet. Submit a prompt above to get started!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Concepts Panel -->
+    <section class="concepts-section">
+      <h2>What's Happening?</h2>
+      <div class="concepts-grid">
+        <div class="concept-card">
+          <h3>Async Queueing</h3>
+          <p>Tasks are queued immediately and processed in the background. You don't wait for each one to finish.</p>
+        </div>
+        <div class="concept-card">
+          <h3>Concurrent Processing</h3>
+          <p>Up to 5 tasks process simultaneously, respecting the API's rate limits.</p>
+        </div>
+        <div class="concept-card">
+          <h3>Exponential Backoff</h3>
+          <p>Failed tasks retry with increasing delays: 2s, 4s, 8s, 16s, 32s</p>
+        </div>
+        <div class="concept-card">
+          <h3>Real-Time Updates</h3>
+          <p>Server-Sent Events stream queue state changes instantly to your browser.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+/**
+ * Task Queue Styles
+ * 
+ * Design Philosophy: Functional, utilitarian, clear.
+ * The focus is on data visualization and system understanding,
+ * not flashy aesthetics. Think dashboard/monitoring tool.
+ */
+
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Neutral, professional palette */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f26;
+  --bg-card: #242a33;
+  --border-color: #3a4250;
+  
+  --text-primary: #e7e9ea;
+  --text-secondary: #8b98a5;
+  --text-muted: #5c6975;
+  
+  /* Status colors */
+  --status-pending: #f7b731;
+  --status-processing: #3498db;
+  --status-retrying: #9b59b6;
+  --status-completed: #27ae60;
+  --status-failed: #e74c3c;
+  
+  /* Accents */
+  --accent: #3498db;
+  --accent-hover: #2980b9;
+  
+  /* Typography */
+  --font-mono: 'SF Mono', 'Consolas', 'Monaco', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header h1 {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Connection Status */
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin-bottom: var(--spacing-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--status-failed);
+}
+
+.connection-status.connected .status-dot {
+  background: var(--status-completed);
+}
+
+.connection-status.connected .status-text {
+  color: var(--status-completed);
+}
+
+.connection-status.disconnected .status-text {
+  color: var(--status-failed);
+}
+
+/* Submit Section */
+.submit-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.submit-section h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.submit-form {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.submit-form input {
+  flex: 1;
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.submit-form input:focus {
+  border-color: var(--accent);
+}
+
+.submit-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.submit-form button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-form button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.submit-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-error {
+  margin-top: var(--spacing-sm);
+  color: var(--status-failed);
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+
+/* Stats Section */
+.stats-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.stats-section h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-md);
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.stat-card.pending .stat-value { color: var(--status-pending); }
+.stat-card.processing .stat-value { color: var(--status-processing); }
+.stat-card.retrying .stat-value { color: var(--status-retrying); }
+.stat-card.completed .stat-value { color: var(--status-completed); }
+.stat-card.failed .stat-value { color: var(--status-failed); }
+
+/* Queue Section */
+.queue-section h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.empty-state {
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Task Card */
+.task-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  position: relative;
+}
+
+.task-card.processing {
+  border-left: 3px solid var(--status-processing);
+}
+
+.task-card.pending {
+  border-left: 3px solid var(--status-pending);
+}
+
+.task-card.retrying {
+  border-left: 3px solid var(--status-retrying);
+}
+
+.task-card.completed {
+  border-left: 3px solid var(--status-completed);
+}
+
+.task-card.failed {
+  border-left: 3px solid var(--status-failed);
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.task-status {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.task-status.pending {
+  background: rgba(247, 183, 49, 0.15);
+  color: var(--status-pending);
+}
+
+.task-status.processing {
+  background: rgba(52, 152, 219, 0.15);
+  color: var(--status-processing);
+}
+
+.task-status.retrying {
+  background: rgba(155, 89, 182, 0.15);
+  color: var(--status-retrying);
+}
+
+.task-status.completed {
+  background: rgba(39, 174, 96, 0.15);
+  color: var(--status-completed);
+}
+
+.task-status.failed {
+  background: rgba(231, 76, 60, 0.15);
+  color: var(--status-failed);
+}
+
+.task-id {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.task-prompt {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  word-break: break-word;
+}
+
+.task-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: var(--spacing-sm);
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--bg-secondary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--status-processing);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--spacing-xs);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Retry Info */
+.retry-info {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: rgba(155, 89, 182, 0.1);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--status-retrying);
+}
+
+/* Error Info */
+.error-info {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--status-failed);
+}
+
+/* Result Image */
+.task-result {
+  margin-top: var(--spacing-md);
+}
+
+.result-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.result-link {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
+  color: var(--accent);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.result-link:hover {
+  text-decoration: underline;
+}
+
+/* Concepts Section */
+.concepts-section {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--border-color);
+}
+
+.concepts-section h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.concept-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+}
+
+.concept-card h3 {
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.concept-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .concepts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .submit-form {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.task-card.processing .task-status {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Fade in animation for new tasks */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-card {
+  animation: fadeIn 0.3s ease;
+}

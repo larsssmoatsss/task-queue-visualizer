@@ -1,0 +1,26 @@
+{
+  "name": "task-queue-app",
+  "version": "1.0.0",
+  "description": "Image generation task queue with retry logic - demonstrates async processing, exponential backoff, and real-time updates",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js"
+  },
+  "keywords": [
+    "task-queue",
+    "async",
+    "retry",
+    "exponential-backoff",
+    "sse",
+    "real-time"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "uuid": "^13.0.0"
+  }
+}
